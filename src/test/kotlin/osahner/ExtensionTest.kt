@@ -2,6 +2,7 @@ package osahner
 
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import java.util.*
 
 internal class ExtensionTest {
@@ -75,5 +76,14 @@ internal class ExtensionTest {
       assertNotNull(it)
       assertEquals(date.time + 24 * 60 * 60 * 1000, it.time)
     }
+  }
+
+  @Test
+  fun encode() {
+    // Create an encoder with strength 16
+    val encoder = BCryptPasswordEncoder(16) // 파라미터를 넣지 않으면 기본 강도 10
+    val result: String = encoder.encode("test!234")
+    println(result)
+    assertTrue(encoder.matches("test!234", result))
   }
 }
