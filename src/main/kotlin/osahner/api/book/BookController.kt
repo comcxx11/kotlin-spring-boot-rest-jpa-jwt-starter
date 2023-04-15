@@ -5,9 +5,9 @@ import osahner.domain.Book
 import osahner.service.BookRepository
 
 @RestController
-@RequestMapping("/books")
+@RequestMapping("/api/v1/books")
 class BookController(private val repository: BookRepository) {
-  @GetMapping("/")
+  @GetMapping(value = ["", "/"])
   fun findAll() = repository.findAll()
 
   @GetMapping("/{id}")
